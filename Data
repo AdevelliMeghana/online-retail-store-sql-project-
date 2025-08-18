@@ -1,0 +1,34 @@
+-- Customers
+INSERT INTO Customers (Name, Email, Phone, Address) VALUES
+('Ravi Kumar', 'ravi@example.com', '9876543210', 'Hyderabad'),
+('Anita Sharma', 'anita@example.com', '9123456780', 'Delhi'),
+('John Mathew', 'john@example.com', '9998887776', 'Mumbai');
+
+-- Products
+INSERT INTO Products (Name, Category, Price, StockQty) VALUES
+('Laptop', 'Electronics', 60000, 10),
+('Smartphone', 'Electronics', 25000, 20),
+('Headphones', 'Accessories', 2000, 50),
+('T-shirt', 'Clothing', 800, 100);
+
+-- Orders
+INSERT INTO Orders (CustomerID, OrderDate, Status, TotalAmount) VALUES
+(1, '2025-08-01', 'Completed', 62500),
+(2, '2025-08-05', 'Pending', 26000);
+
+-- OrderDetails
+INSERT INTO OrderDetails (OrderID, ProductID, Quantity, SubTotal) VALUES
+(1, 1, 1, 60000),
+(1, 3, 1, 2500),
+(2, 2, 1, 25000),
+(2, 4, 1, 1000);
+
+-- Payments
+INSERT INTO Payments (OrderID, PaymentDate, PaymentMethod, Amount) VALUES
+(1, '2025-08-02', 'Credit Card', 62500),
+(2, '2025-08-05', 'UPI', 26000);
+
+-- Shipments
+INSERT INTO Shipments (OrderID, ShipmentDate, Status, TrackingNumber) VALUES
+(1, '2025-08-03', 'Delivered', 'TRK12345'),
+(2, '2025-08-06', 'Shipped', 'TRK67890');
