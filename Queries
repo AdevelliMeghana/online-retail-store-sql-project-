@@ -1,0 +1,21 @@
+-- 1. Get total sales per product
+SELECT P.Name, SUM(OD.Quantity) AS TotalSold, SUM(OD.SubTotal) AS Revenue
+FROM OrderDetails OD
+JOIN Products P ON OD.ProductID = P.ProductID
+GROUP BY P.Name;
+
+-- 2. Find top 3 customers by purchase amount
+SELECT C.Name, SUM(O.TotalAmount) AS TotalSpent
+FROM Orders O
+JOIN Customers C ON O.CustomerID = C.CustomerID
+GROUP BY C.Name
+ORDER BY TotalSpent DESC
+LIMIT 3;
+
+-- 3. Get pending orders
+SELECT OrderID, CustomerID, TotalAmount FROM Orders WHERE Status = 'Pending';
+
+-- 4. Get monthly sales report
+SELECT DATE_FORMAT(OrderDate, '%Y-%m') AS Month, SUM(TotalAmount) AS MonthlySales
+FROM Orders
+GROUP BY Month;
