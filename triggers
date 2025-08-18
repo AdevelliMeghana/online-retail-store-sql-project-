@@ -1,0 +1,10 @@
+DELIMITER //
+CREATE TRIGGER UpdateStockAfterOrder
+AFTER INSERT ON OrderDetails
+FOR EACH ROW
+BEGIN
+    UPDATE Products
+    SET StockQty = StockQty - NEW.Quantity
+    WHERE ProductID = NEW.ProductID;
+END //
+DELIMITER ;
