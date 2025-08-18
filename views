@@ -1,0 +1,5 @@
+CREATE VIEW CustomerOrderSummary AS
+SELECT C.Name, O.OrderID, O.OrderDate, O.TotalAmount, S.Status AS ShipmentStatus
+FROM Customers C
+JOIN Orders O ON C.CustomerID = O.CustomerID
+JOIN Shipments S ON O.OrderID = S.OrderID;
