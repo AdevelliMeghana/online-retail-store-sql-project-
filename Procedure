@@ -1,0 +1,26 @@
+DELIMITER //
+CREATE PROCEDURE PlaceOrder(IN p_CustomerID INT, IN p_ProductID INT, IN p_Quantity INT)
+BEGIN
+    DECLARE price DECIMAL(10,2);
+    DECLARE subtotal DECIMAL(10,2);
+    DECLARE order_id INT;
+
+    -- Get product price
+    SELECT Price INTO price FROM Products WHERE ProductID = p_ProductID;
+
+    SET subtotal = price * p_Quantity;
+
+    -- Create new order
+    INSERT INTO Orders (CustomerID, OrderDate, Status, TotalAmount)
+    VALUES (p_CustomerID, CURDATE(), 'Pending', subtotal);
+
+    SET order_id = LAST_INSERT_ID();
+
+    -- Insert order details
+    INSERT INTO OrderDetails (OrderID, ProductID, Quantity, SubTotal)
+    VALUES (order_id, p_ProductID, p_Quantity, subtotal);
+
+    -- Update stock
+    UPDATE Products SET StockQty = StockQty - p_Quantity WHERE ProductID = p_ProductID;
+END //
+DELIMITER ;
